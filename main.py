@@ -73,11 +73,14 @@ lbl3 = Label(root, text="Quantity", fg="white",
              bg="grey", font=("Arial", 15))
 lbl4 = Label(root, text="Price", fg="white",
              bg="grey", font=("Arial", 15))
+lbl5 = Label(root, text="vat 11%", fg="white",
+             bg="grey", font=("Arial", 15))
 
 e1 = Entry(root, font=12, justify="center")
 e2 = Entry(root, font=12)
 e3 = Entry(root, font=12)
 e4 = Entry(root, font=12)
+e5 = Entry(root, font=12)
 
 btn1 = Button(root, text="SELL", borderwidth=10,
               width=48, height=5, font=10, command=main.sell)
@@ -90,6 +93,8 @@ def edit(event):
     e1.insert(0, selecteddata[0])
     e2.insert(0, selecteddata[1])
     e4.insert(0, selecteddata[3])
+    priceaftertax = int(selecteddata[3]) * 0.025
+    e5.insert(0,str(int(e4.get()) + priceaftertax))
     e1.config(state="readonly")
     e2.config(state="readonly")
     e4.config(state="readonly")
@@ -113,13 +118,15 @@ lbl1.place(x=40, y=200)
 lbl2.place(x=40, y=270)
 lbl3.place(x=40, y=340)
 lbl4.place(x=40, y=410)
+lbl5.place(x=40, y=470)
 
 e1.place(x=210, y=200)
 e2.place(x=210, y=275)
 e3.place(x=210, y=340)
 e4.place(x=210, y=410)
+e5.place(x=210, y=470)
 
-btn1.place(x=20, y=480)
+btn1.place(x=20, y=520)
 btn2.place(x=1020, y=140)
 # btn3.place(x=380, y=480)
 
