@@ -83,7 +83,7 @@ e4 = Entry(root, font=12)
 e5 = Entry(root, font=12)
 
 btn1 = Button(root, text="SELL", borderwidth=10,
-              width=48, height=5, font=10, command=main.sell)
+              width=45, height=5, font=10, command=main.sell)
 btn2 = Button(root, text="ADD MED", width=14, font=7, command=addmed)
 # second frame
 
