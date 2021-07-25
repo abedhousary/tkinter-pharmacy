@@ -1,6 +1,7 @@
 from tkinter import *
 import mysql.connector
 from addmed import addmed
+from sale import sales
 
 
 class phar:
@@ -18,6 +19,7 @@ class phar:
         e2.delete(0, END)
         e3.delete(0, END)
         e4.delete(0, END)
+        e5.delete(0, END)
 
     def upda(self):
         quan = e3.get()
@@ -29,10 +31,10 @@ class phar:
 
     def sell(self):
         name = e2.get()
-        price = e4.get()
+        price = e5.get()
         quan = e3.get()
         self.cr.execute(
-            "insert into sells (name,price,quan) values (%s,%s,%s) ", (name, price, quan))
+            "insert into sells (name,price,quan,beforetax) values (%s,%s,%s,%s * %s ) ", (name,price, quan,e4.get(),quan))
         self.cn.commit()
         self.upda()
         lis.delete(0, END)
@@ -46,6 +48,11 @@ class phar:
             s2 = "{:>25}{:>40}{:>40}{:>38}".format(
                 row[0], row[1], row[2], row[3])
             lis.insert(END, s2)
+    def refresh (self):
+        lis.delete(0,END)
+        self.getdata()
+
+
 
 
 main = phar()
@@ -85,20 +92,23 @@ e5 = Entry(root, font=12)
 btn1 = Button(root, text="SELL", borderwidth=10,
               width=45, height=5, font=10, command=main.sell)
 btn2 = Button(root, text="ADD MED", width=14, font=7, command=addmed)
-# second frame
-
+btn3 = Button(root, text="SALES", width=14, font=7, command=sales)
+btn4 = Button(root, text="Refresh", width=14, font=7, command=main.refresh)
 
 def edit(event):
+    main.clear()
     selecteddata = lis.get(ACTIVE).split()
     e1.insert(0, selecteddata[0])
     e2.insert(0, selecteddata[1])
     e4.insert(0, selecteddata[3])
-    priceaftertax = int(selecteddata[3]) * 0.025
-    e5.insert(0,str(int(e4.get()) + priceaftertax))
     e1.config(state="readonly")
     e2.config(state="readonly")
     e4.config(state="readonly")
-
+def calc(event):
+    cal = int(e3.get()) * int(e4.get())
+    priceaftertax = cal * 0.025 + cal
+    e5.delete(0,END)
+    e5.insert(0,priceaftertax)
 
 frame1 = Frame(root, bg="white", height=435, width=600)
 sc = Scrollbar(frame1, orient="vertical")
@@ -123,12 +133,14 @@ lbl5.place(x=40, y=470)
 e1.place(x=210, y=200)
 e2.place(x=210, y=275)
 e3.place(x=210, y=340)
+e3.bind("<Return>",calc)
 e4.place(x=210, y=410)
 e5.place(x=210, y=470)
 
 btn1.place(x=20, y=520)
 btn2.place(x=1020, y=140)
-# btn3.place(x=380, y=480)
+btn3.place(x=820, y=140)
+btn4.place(x=620, y=140)
 
 frame1.place(x=590, y=190)
 root.mainloop()

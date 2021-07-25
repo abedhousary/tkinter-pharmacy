@@ -1,6 +1,5 @@
 from tkinter import *
 import mysql.connector
-
 def addmed () :
     class phar:
         def __init__(self):
@@ -55,7 +54,8 @@ def addmed () :
                 s2 ="{:>25}{:>40}{:>40}{:>38}".format(row[0],row[1],row[2],row[3])
                 lis.insert(END,s2)
     
-    
+
+
     main = phar()
     
     root = Tk()
