@@ -15,17 +15,16 @@ def sales():
 
         def getdata(self):
             mon = 0
-            self.cr.execute("select id,name,price from sells")
+            self.cr.execute("select id,name,price,date from sells")
             fd = self.cr.fetchall()
             for row in fd:
-                s2 = "{:^85}{:^40}{:^110}".format(row[0], row[1], row[2])
+                s2 = "{:^85}{:^40}{:^40}{:^50}".format(row[0], row[1], row[2], str(row[3]))
                 mon += float(row[2])
-
                 lis.insert(END, s2)
             e1.insert(0, str(int(mon)))
     Db = db()
     root = Tk()
-    width = 800
+    width = 900
     height = 500
     sw = root.winfo_screenwidth()
     sh = root.winfo_screenheight()
@@ -33,7 +32,7 @@ def sales():
     y = (sh / 2) - (height / 2)
     root.geometry("%dx%d+%d+%d" % (width, height, x, y))
     root.config(bg="grey")
-    header = "{:>10}{:^130}{:^30}".format("Id", "Name", "Price")
+    header = "{:^85}{:^40}{:^40}{:^50}".format("Id", "Name", "Price","Date of purchase")
     lbl = Label(root, text="Gains dashboard", bg="grey", font=("fantasy", 18))
     lbl1 = Label(root, text=header, bg="grey")
     sc = Scrollbar(root, orient="vertical")
@@ -53,3 +52,4 @@ def sales():
     Db.getdata()
     root.mainloop()
 
+sales()
