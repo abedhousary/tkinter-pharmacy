@@ -14,11 +14,16 @@ def sales():
             self.cr = self.cn.cursor()
 
         def getdata(self):
+            lis.delete(0, END)
+            e1.delete(0,END)
+
             global mon
             self.cr.execute("select id,name,price,date from sells")
             fd = self.cr.fetchall()
+            mon = 0
             for row in fd:
                 s2 = "{:^85}{:^40}{:^40}{:^50}".format(row[0], row[1], row[2], str(row[3]))
+
                 mon += float(row[2])
                 lis.insert(END, s2)
             e1.insert(0, str(int(mon)))
@@ -51,10 +56,12 @@ def sales():
     lbl = Label(frame2, text="Gains dashboard", bg="grey", font=("fantasy", 18))
     lbl2 = Label(frame2,text = "Search by med name",bg = "grey" )
     e2 = Entry(frame2)
+    bt = Button(frame2,text = "Reset",command = Db.getdata)
     e2.bind("<Return>",Db.sbyname)
     lbl.place(x=390 , y= 1 )
     lbl2.place(x = 90 , y=5)
     e2.place(x = 220 , y = 5)
+    bt.place(x = 352 , y = 5)
     lbl1 = Label(root, text=header, bg="grey")
     sc = Scrollbar(root, orient="vertical")
 
@@ -74,4 +81,4 @@ def sales():
 
     Db.getdata()
     root.mainloop()
-
+sales()
