@@ -42,8 +42,8 @@ def sales():
 
     Db = db()
     root = Tk()
-    width = 900
-    height = 500
+    width = 920
+    height = 520
     sw = root.winfo_screenwidth()
     sh = root.winfo_screenheight()
     x = (sw / 2) - (width / 2)
@@ -81,4 +81,3 @@ def sales():
 
     Db.getdata()
     root.mainloop()
-sales()
