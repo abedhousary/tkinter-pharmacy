@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 30, 2021 at 10:33 AM
+-- Generation Time: Dec 05, 2021 at 05:36 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -35,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `meds` (
   `price` varchar(155) DEFAULT NULL,
   `soldmoney` varchar(155) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `meds`
+--
+
+INSERT INTO `meds` (`id`, `name`, `quantity`, `price`, `soldmoney`) VALUES
+(1, 'Vitamic c ', 81, '45000', '100');
 
 -- --------------------------------------------------------
 
@@ -52,7 +59,14 @@ CREATE TABLE IF NOT EXISTS `sells` (
   `quan` varchar(55) DEFAULT NULL,
   `beforetax` varchar(55) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sells`
+--
+
+INSERT INTO `sells` (`id`, `name`, `date`, `price`, `quan`, `beforetax`) VALUES
+(1, 'Vitamic', '2021-12-05 19:29:07', '1900', '19', '1900');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
