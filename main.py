@@ -33,8 +33,9 @@ class phar:
         name = e2.get()
         price = e5.get()
         quan = e3.get()
+        receipt = (int(e4.get()) * int(e3.get()))
         self.cr.execute(
-            "insert into sells (name,price,quan,beforetax) values (%s,%s,%s,%s * %s ) ", (name,price, quan,e4.get(),quan))
+            "insert into sells (name,price,quan,beforetax) values (%s,%s,%s,%s * %s ) ", (name, receipt, quan, e4.get(), quan))
         self.cn.commit()
         self.upda()
         lis.delete(0, END)
@@ -48,11 +49,10 @@ class phar:
             s2 = "{:>25}{:>40}{:>40}{:>38}".format(
                 row[0], row[1], row[2], row[3])
             lis.insert(END, s2)
-    def refresh (self):
-        lis.delete(0,END)
+
+    def refresh(self):
+        lis.delete(0, END)
         self.getdata()
-
-
 
 
 main = phar()
@@ -95,6 +95,7 @@ btn2 = Button(root, text="ADD MED", width=14, font=7, command=addmed)
 btn3 = Button(root, text="SALES", width=14, font=7, command=sales)
 btn4 = Button(root, text="Refresh", width=14, font=7, command=main.refresh)
 
+
 def edit(event):
     main.clear()
     selecteddata = lis.get(ACTIVE).split()
@@ -104,11 +105,14 @@ def edit(event):
     e1.config(state="readonly")
     e2.config(state="readonly")
     e4.config(state="readonly")
+
+
 def calc(event):
     cal = int(e3.get()) * int(e4.get())
     priceaftertax = cal * 0.025 + cal
-    e5.delete(0,END)
-    e5.insert(0,priceaftertax)
+    e5.delete(0, END)
+    e5.insert(0, priceaftertax)
+
 
 frame1 = Frame(root, bg="white", height=435, width=600)
 sc = Scrollbar(frame1, orient="vertical")
@@ -133,7 +137,7 @@ lbl5.place(x=40, y=470)
 e1.place(x=210, y=200)
 e2.place(x=210, y=275)
 e3.place(x=210, y=340)
-e3.bind("<Return>",calc)
+e3.bind("<Return>", calc)
 e4.place(x=210, y=410)
 e5.place(x=210, y=470)
 
